@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AMC Difficulty Visual</title>
+<style type="text/css">
+canvas{
+	border: 1px solid grey;
+	height: calc(33vh - 10px);
+}
+</style>
+</head>
+<body>
+	<script type="text/javascript" src="amcDifficultyVisualSrc.js"></script>
+
+<script type="text/javascript">
+data = data.split("\n");
+
+var array = [];
+for (var i = 0; i < data.length; i+=10) {
+	array.push(data.slice(i,i+10));
+}
+
+
+var percCorrect = [];
+for (var i = 0; i < array.length; i++) {
+	array[i].forEach(item=>{
+		if(item.slice(-1) == "*"){
+			//this is the correct answer
+			percCorrect.push(Number(item.slice(0,-1)));
+		}
+	});
+}
+
+
+var final = [];
+for (var i = 0; i < percCorrect.length; i+=25) {
+	final.push(percCorrect.slice(i, i+25));
+}
+
+
+var index = 0;
+final.forEach(fullTest=>{
+	index ++;
+	var canvas = document.createElement("canvas");
+	canvas.width = 800;
+	canvas.height = 600;
+	document.body.appendChild(canvas);
+
+	var ctx = canvas.getContext("2d");
+
+	ctx.fillStyle = "white";
+	ctx.fillRect(0,0,800,600);
+	ctx.fillStyle = "black";
+
+
+	var testName = Math.floor(2022-index/2)+" AMC 10"+ (index%2==0?"A":"B");
+
+	ctx.font = "30px arial";
+	ctx.fillText(testName+" Problem Difficulty", 200, 40);
+	ctx.font = "10px arial";
+
+
+	for (var i = 0; i < fullTest.length; i++) {
+		ctx.beginPath();
+		ctx.moveTo(32*i+32, 600-fullTest[i]*6);
+		ctx.lineTo(32*i+64, 600-fullTest[i+1]*6);
+		ctx.stroke();
+
+		ctx.beginPath();
+		ctx.arc(32*i+32, 600-fullTest[i]*6, 5, 0, 2*Math.PI);
+		ctx.fill();
+
+		ctx.fillText("#"+(i+1)+": "+fullTest[i]+"%", 32*i+16, 590-fullTest[i]*6);
+	}
+
+});
+</script>
+
+<a href="http://kiraprograms.com">My other projects</a>
+</body>
+</html>
