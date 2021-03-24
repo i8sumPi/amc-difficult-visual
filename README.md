@@ -5,4 +5,6 @@ The problem difficulty is a little difficult to read on the statistics page so I
 
 Data taken from [the AMC Statistics page](https://amc-reg.maa.org/reports/generalreports.aspx).
 
+Visible on [my website](http://kiraprograms.com/amcDifficultyVisual.html).
+
 ![alt text](http://kiraprograms.com/amcDifficultyVisual.png)
